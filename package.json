@@ -25,7 +25,8 @@
     "version": "standard-version",
     "prepare-release": "run-s cov:check doc:html version doc:publish",
     "test": "jest",
-    "integ-test": "jest test/integ"
+    "integ-test": "jest test/integ",
+    "postinstall": "patch-package"
   },
   "engines": {
     "node": ">=10"
@@ -87,13 +88,14 @@
     "jest-sinon": "^1.0.4",
     "npm-run-all": "^4.1.5",
     "open-cli": "^6.0.1",
+    "patch-package": "^6.4.7",
     "prettier": "^2.1.1",
     "prettier-plugin-organize-imports": "^2.1.0",
     "sinon": "^11.1.2",
     "standard-version": "^9.0.0",
     "ts-jest": "^27.0.4",
     "ts-node": "^9.0.0",
-    "typechain": "^5.0.0",
+    "typechain": "^7.0.1",
     "typescript": "^4.2.2"
   },
   "files": [
