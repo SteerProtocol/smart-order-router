@@ -1,0 +1,13 @@
+diff --git a/node_modules/typechain/dist/typechain/io.js b/node_modules/typechain/dist/typechain/io.js
+index 189c2e5..bdd9a08 100644
+--- a/node_modules/typechain/dist/typechain/io.js
++++ b/node_modules/typechain/dist/typechain/io.js
+@@ -34,7 +34,7 @@ exports.loadFileDescriptions = loadFileDescriptions;
+ function skipEmptyAbis(paths) {
+     const notEmptyAbis = paths
+         .map((p) => ({ path: p, contents: fs_1.readFileSync(p, 'utf-8') }))
+-        .filter((fd) => __1.extractAbi(fd.contents).length !== 0);
++        .filter((fd) => JSON.parse(fd.contents).buildInfo == undefined ? __1.extractAbi(fd.contents).length !== 0 : false);
+     return notEmptyAbis.map((p) => p.path);
+ }
+ exports.skipEmptyAbis = skipEmptyAbis;
