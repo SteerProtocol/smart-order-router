@@ -486,8 +486,8 @@ describe('alpha router', () => {
       ).toBeTruthy();
       expect(
         swap!.estimatedGasUsedUSD.currency.equals(USDC) ||
-          swap!.estimatedGasUsedUSD.currency.equals(USDT) ||
-          swap!.estimatedGasUsedUSD.currency.equals(DAI)
+        swap!.estimatedGasUsedUSD.currency.equals(USDT) ||
+        swap!.estimatedGasUsedUSD.currency.equals(DAI)
       ).toBeTruthy();
       expect(swap!.gasPriceWei.toString()).toEqual(
         mockGasPriceWeiBN.toString()
@@ -645,8 +645,8 @@ describe('alpha router', () => {
       ).toBeTruthy();
       expect(
         swap!.estimatedGasUsedUSD.currency.equals(USDC) ||
-          swap!.estimatedGasUsedUSD.currency.equals(USDT) ||
-          swap!.estimatedGasUsedUSD.currency.equals(DAI)
+        swap!.estimatedGasUsedUSD.currency.equals(USDT) ||
+        swap!.estimatedGasUsedUSD.currency.equals(DAI)
       ).toBeTruthy();
       expect(swap!.gasPriceWei.toString()).toEqual(
         mockGasPriceWeiBN.toString()
@@ -746,8 +746,8 @@ describe('alpha router', () => {
       ).toBeTruthy();
       expect(
         swap!.estimatedGasUsedUSD.currency.equals(USDC) ||
-          swap!.estimatedGasUsedUSD.currency.equals(USDT) ||
-          swap!.estimatedGasUsedUSD.currency.equals(DAI)
+        swap!.estimatedGasUsedUSD.currency.equals(USDT) ||
+        swap!.estimatedGasUsedUSD.currency.equals(DAI)
       ).toBeTruthy();
       expect(swap!.gasPriceWei.toString()).toEqual(
         mockGasPriceWeiBN.toString()
@@ -810,8 +810,8 @@ describe('alpha router', () => {
       ).toBeTruthy();
       expect(
         swap!.estimatedGasUsedUSD.currency.equals(USDC) ||
-          swap!.estimatedGasUsedUSD.currency.equals(USDT) ||
-          swap!.estimatedGasUsedUSD.currency.equals(DAI)
+        swap!.estimatedGasUsedUSD.currency.equals(USDT) ||
+        swap!.estimatedGasUsedUSD.currency.equals(DAI)
       ).toBeTruthy();
       expect(swap!.gasPriceWei.toString()).toEqual(
         mockGasPriceWeiBN.toString()
@@ -881,8 +881,8 @@ describe('alpha router', () => {
       ).toBeTruthy();
       expect(
         swap!.estimatedGasUsedUSD.currency.equals(USDC) ||
-          swap!.estimatedGasUsedUSD.currency.equals(USDT) ||
-          swap!.estimatedGasUsedUSD.currency.equals(DAI)
+        swap!.estimatedGasUsedUSD.currency.equals(USDT) ||
+        swap!.estimatedGasUsedUSD.currency.equals(DAI)
       ).toBeTruthy();
       expect(swap!.gasPriceWei.toString()).toEqual(
         mockGasPriceWeiBN.toString()
@@ -951,8 +951,8 @@ describe('alpha router', () => {
       ).toBeTruthy();
       expect(
         swap!.estimatedGasUsedUSD.currency.equals(USDC) ||
-          swap!.estimatedGasUsedUSD.currency.equals(USDT) ||
-          swap!.estimatedGasUsedUSD.currency.equals(DAI)
+        swap!.estimatedGasUsedUSD.currency.equals(USDT) ||
+        swap!.estimatedGasUsedUSD.currency.equals(DAI)
       ).toBeTruthy();
       expect(swap!.gasPriceWei.toString()).toEqual(
         mockGasPriceWeiBN.toString()
@@ -1091,8 +1091,8 @@ describe('alpha router', () => {
       ).toBeTruthy();
       expect(
         swap!.estimatedGasUsedUSD.currency.equals(USDC) ||
-          swap!.estimatedGasUsedUSD.currency.equals(USDT) ||
-          swap!.estimatedGasUsedUSD.currency.equals(DAI)
+        swap!.estimatedGasUsedUSD.currency.equals(USDT) ||
+        swap!.estimatedGasUsedUSD.currency.equals(DAI)
       ).toBeTruthy();
       expect(swap!.gasPriceWei.toString()).toEqual(
         mockGasPriceWeiBN.toString()
@@ -1166,8 +1166,8 @@ describe('alpha router', () => {
       ).toBeTruthy();
       expect(
         swap!.estimatedGasUsedUSD.currency.equals(USDC) ||
-          swap!.estimatedGasUsedUSD.currency.equals(USDT) ||
-          swap!.estimatedGasUsedUSD.currency.equals(DAI)
+        swap!.estimatedGasUsedUSD.currency.equals(USDT) ||
+        swap!.estimatedGasUsedUSD.currency.equals(DAI)
       ).toBeTruthy();
       expect(swap!.gasPriceWei.toString()).toEqual(
         mockGasPriceWeiBN.toString()
@@ -1224,8 +1224,8 @@ describe('alpha router', () => {
       ).toBeTruthy();
       expect(
         swap!.estimatedGasUsedUSD.currency.equals(USDC) ||
-          swap!.estimatedGasUsedUSD.currency.equals(USDT) ||
-          swap!.estimatedGasUsedUSD.currency.equals(DAI)
+        swap!.estimatedGasUsedUSD.currency.equals(USDT) ||
+        swap!.estimatedGasUsedUSD.currency.equals(DAI)
       ).toBeTruthy();
       expect(swap!.gasPriceWei.toString()).toEqual(
         mockGasPriceWeiBN.toString()
@@ -1290,8 +1290,8 @@ describe('alpha router', () => {
       ).toBeTruthy();
       expect(
         swap!.estimatedGasUsedUSD.currency.equals(USDC) ||
-          swap!.estimatedGasUsedUSD.currency.equals(USDT) ||
-          swap!.estimatedGasUsedUSD.currency.equals(DAI)
+        swap!.estimatedGasUsedUSD.currency.equals(USDT) ||
+        swap!.estimatedGasUsedUSD.currency.equals(DAI)
       ).toBeTruthy();
       expect(swap!.gasPriceWei.toString()).toEqual(
         mockGasPriceWeiBN.toString()
@@ -1355,8 +1355,8 @@ describe('alpha router', () => {
       ).toBeTruthy();
       expect(
         swap!.estimatedGasUsedUSD.currency.equals(USDC) ||
-          swap!.estimatedGasUsedUSD.currency.equals(USDT) ||
-          swap!.estimatedGasUsedUSD.currency.equals(DAI)
+        swap!.estimatedGasUsedUSD.currency.equals(USDT) ||
+        swap!.estimatedGasUsedUSD.currency.equals(DAI)
       ).toBeTruthy();
       expect(swap!.gasPriceWei.toString()).toEqual(
         mockGasPriceWeiBN.toString()
@@ -1387,7 +1387,7 @@ describe('alpha router', () => {
           const route = await alphaRouter.routeToRatio(
             token0Balance,
             token1Balance,
-            position,
+            [position],
             SWAP_AND_ADD_CONFIG,
             undefined,
             ROUTING_CONFIG
@@ -1423,7 +1423,7 @@ describe('alpha router', () => {
           await alphaRouter.routeToRatio(
             token0Balance,
             token1Balance,
-            position,
+            [position],
             SWAP_AND_ADD_CONFIG,
             undefined,
             ROUTING_CONFIG
@@ -1454,7 +1454,7 @@ describe('alpha router', () => {
           await alphaRouter.routeToRatio(
             token0Balance,
             token1Balance,
-            position,
+            [position],
             SWAP_AND_ADD_CONFIG,
             undefined,
             ROUTING_CONFIG
@@ -1483,7 +1483,7 @@ describe('alpha router', () => {
           await alphaRouter.routeToRatio(
             token0Balance,
             token1Balance,
-            position,
+            [position],
             SWAP_AND_ADD_CONFIG,
             undefined,
             ROUTING_CONFIG
@@ -1514,7 +1514,7 @@ describe('alpha router', () => {
           await alphaRouter.routeToRatio(
             token0Balance,
             token1Balance,
-            position,
+            [position],
             SWAP_AND_ADD_CONFIG,
             undefined,
             ROUTING_CONFIG
@@ -1545,7 +1545,7 @@ describe('alpha router', () => {
           await alphaRouter.routeToRatio(
             token0Balance,
             token1Balance,
-            position,
+            [position],
             SWAP_AND_ADD_CONFIG,
             undefined,
             ROUTING_CONFIG
@@ -1578,7 +1578,7 @@ describe('alpha router', () => {
         const result = await alphaRouter.routeToRatio(
           token0Balance,
           token1Balance,
-          position,
+          [position],
           SWAP_AND_ADD_CONFIG,
           undefined,
           ROUTING_CONFIG
@@ -1604,7 +1604,7 @@ describe('alpha router', () => {
         const result = await alphaRouter.routeToRatio(
           token0Balance,
           token1Balance,
-          position,
+          [position],
           SWAP_AND_ADD_CONFIG,
           undefined,
           ROUTING_CONFIG
@@ -1676,7 +1676,7 @@ describe('alpha router', () => {
         const swap = await alphaRouter.routeToRatio(
           token0Balance,
           token1Balance,
-          position,
+          [position],
           SWAP_AND_ADD_CONFIG,
           undefined,
           ROUTING_CONFIG
@@ -1729,7 +1729,7 @@ describe('alpha router', () => {
           await alphaRouter.routeToRatio(
             token0Balance,
             token1Balance,
-            position,
+            [position],
             SWAP_AND_ADD_CONFIG,
             undefined,
             ROUTING_CONFIG
@@ -1792,7 +1792,7 @@ describe('alpha router', () => {
           await alphaRouter.routeToRatio(
             token0Balance,
             token1Balance,
-            position,
+            [position],
             SWAP_AND_ADD_CONFIG,
             undefined,
             ROUTING_CONFIG
@@ -1859,7 +1859,7 @@ describe('alpha router', () => {
           await alphaRouter.routeToRatio(
             token0Balance,
             token1Balance,
-            position,
+            [position],
             SWAP_AND_ADD_CONFIG,
             undefined,
             ROUTING_CONFIG
@@ -1937,7 +1937,7 @@ describe('alpha router', () => {
           await alphaRouter.routeToRatio(
             token0Balance,
             token1Balance,
-            position,
+            [position],
             SWAP_AND_ADD_CONFIG,
             undefined,
             ROUTING_CONFIG
@@ -2001,7 +2001,7 @@ describe('alpha router', () => {
             await alphaRouter.routeToRatio(
               token0Balance,
               token1Balance,
-              position,
+              [position],
               SWAP_AND_ADD_CONFIG,
               undefined,
               ROUTING_CONFIG
@@ -2064,7 +2064,7 @@ describe('alpha router', () => {
             const swap = await alphaRouter.routeToRatio(
               token0Balance,
               token1Balance,
-              position,
+              [position],
               SWAP_AND_ADD_CONFIG,
               undefined,
               ROUTING_CONFIG
@@ -2109,7 +2109,7 @@ describe('alpha router', () => {
             await alphaRouter.routeToRatio(
               token0Balance,
               token1Balance,
-              position,
+              [position],
               SWAP_AND_ADD_CONFIG,
               undefined,
               ROUTING_CONFIG
@@ -2184,7 +2184,7 @@ describe('alpha router', () => {
         const swap = await alphaRouter.routeToRatio(
           token0Balance,
           token1Balance,
-          positionPreLiquidity,
+          [positionPreLiquidity],
           SWAP_AND_ADD_CONFIG,
           SWAP_AND_ADD_OPTIONS,
           ROUTING_CONFIG
@@ -2229,7 +2229,7 @@ describe('alpha router', () => {
         const swap = await alphaRouter.routeToRatio(
           token0Balance,
           token1Balance,
-          positionPreLiquidity,
+          [positionPreLiquidity],
           SWAP_AND_ADD_CONFIG,
           undefined,
           ROUTING_CONFIG

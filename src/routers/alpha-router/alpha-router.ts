@@ -116,7 +116,7 @@ import {
 import {
   CandidatePoolsBySelectionCriteria,
   getV2CandidatePools,
-  getV3CandidatePools as getV3CandidatePools,
+  getV3CandidatePools,
   PoolId,
 } from './functions/get-candidate-pools';
 import {
@@ -309,8 +309,8 @@ export type AlphaRouterConfig = {
 
 export class AlphaRouter
   implements
-    IRouter<AlphaRouterConfig>,
-    ISwapToRatio<AlphaRouterConfig, SwapAndAddConfig>
+  IRouter<AlphaRouterConfig>,
+  ISwapToRatio<AlphaRouterConfig, SwapAndAddConfig>
 {
   protected chainId: ChainId;
   protected provider: providers.BaseProvider;
@@ -522,10 +522,10 @@ export class AlphaRouter
         chainId,
         this.provider instanceof providers.JsonRpcProvider
           ? new OnChainGasPriceProvider(
-              chainId,
-              new EIP1559GasPriceProvider(this.provider),
-              new LegacyGasPriceProvider(this.provider)
-            )
+            chainId,
+            new EIP1559GasPriceProvider(this.provider),
+            new LegacyGasPriceProvider(this.provider)
+          )
           : new ETHGasStationInfoProvider(ETH_GAS_STATION_API_URL),
         new NodeJSCache<GasPrice>(
           new NodeCache({ stdTTL: 15, useClones: false })
@@ -566,24 +566,44 @@ export class AlphaRouter
   public async routeToRatio(
     token0Balance: CurrencyAmount,
     token1Balance: CurrencyAmount,
-    position: Position,
+    positions: Array<Position>,
     swapAndAddConfig: SwapAndAddConfig,
     swapAndAddOptions?: SwapAndAddOptions,
     routingConfig: Partial<AlphaRouterConfig> = DEFAULT_ROUTING_CONFIG_BY_CHAIN(
       this.chainId
     )
   ): Promise<SwapToRatioResponse> {
+    // In the below logic, 'wrapped' is a Token type
     if (
+      //Returns true if the address of this token sorts before the address of the other token
       token1Balance.currency.wrapped.sortsBefore(token0Balance.currency.wrapped)
     ) {
+      // Sort the tokens
       [token0Balance, token1Balance] = [token1Balance, token0Balance];
     }
 
+    // Pull the first position provided,
+    // there should be atleast one position proided into this algorithm
+    const position = positions[0];
+
+    // Every position has a pool, if there is no pool
+    // then we should short circuit and return an error
+    if (position?.pool == undefined) {
+      throw new Error('No positions provided.');
+    }
+
+    // Pull the pool from the position
+    // All the pools should be the same for the entire positions array
+    const pool = position!.pool;
+
+    // Provide the positions as well as the current pool sqrtRatio,
+    // we have true here because above we sort so it's always token0 for token1
     let preSwapOptimalRatio = this.calculateOptimalRatio(
-      position,
-      position.pool.sqrtRatioX96,
+      positions,
+      pool.sqrtRatioX96,
       true
     );
+
     // set up parameters according to which token will be swapped
     let zeroForOne: boolean;
     if (position.pool.tickCurrent > position.tickUpper) {
@@ -670,7 +690,7 @@ export class AlphaRouter
                 v3Route.sqrtPriceX96AfterList[i]!.toString()
               );
               optimalRatio = this.calculateOptimalRatio(
-                position,
+                [position],
                 JSBI.BigInt(targetPoolPriceUpdate!.toString()),
                 zeroForOne
               );
@@ -1002,8 +1022,7 @@ export class AlphaRouter
 
       if (token0Invalid || token1Invalid) {
         log.info(
-          `Dropping pool ${poolToString(pool)} because token is invalid. ${
-            pool.token0.symbol
+          `Dropping pool ${poolToString(pool)} because token is invalid. ${pool.token0.symbol
           }: ${token0Validation}, ${pool.token1.symbol}: ${token1Validation}`
         );
       }
@@ -1442,38 +1461,52 @@ export class AlphaRouter
   }
 
   private calculateOptimalRatio(
-    position: Position,
+    positions: Array<Position>,
     sqrtRatioX96: JSBI,
     zeroForOne: boolean
   ): Fraction {
-    const upperSqrtRatioX96 = TickMath.getSqrtRatioAtTick(position.tickUpper);
-    const lowerSqrtRatioX96 = TickMath.getSqrtRatioAtTick(position.tickLower);
+    let frac = new Fraction(0, 0);
+    let optimalRatio = positions.reduce<Fraction>((accumulator, position) => {
+      const upperSqrtRatioX96 = TickMath.getSqrtRatioAtTick(position.tickUpper);
+      const lowerSqrtRatioX96 = TickMath.getSqrtRatioAtTick(position.tickLower);
 
-    // returns Fraction(0, 1) for any out of range position regardless of zeroForOne. Implication: function
-    // cannot be used to determine the trading direction of out of range positions.
-    if (
-      JSBI.greaterThan(sqrtRatioX96, upperSqrtRatioX96) ||
-      JSBI.lessThan(sqrtRatioX96, lowerSqrtRatioX96)
-    ) {
-      return new Fraction(0, 1);
-    }
+      // returns Fraction(0, 1) for any out of range position regardless of zeroForOne. Implication: function
+      // cannot be used to determine the trading direction of out of range positions.
+      if (
+        JSBI.greaterThan(sqrtRatioX96, upperSqrtRatioX96) ||
+        JSBI.lessThan(sqrtRatioX96, lowerSqrtRatioX96)
+      ) {
+        accumulator = new Fraction(0, 1);
+        return accumulator;
+      }
 
-    const precision = JSBI.BigInt('1' + '0'.repeat(18));
-    let optimalRatio = new Fraction(
-      SqrtPriceMath.getAmount0Delta(
-        sqrtRatioX96,
-        upperSqrtRatioX96,
-        precision,
-        true
-      ),
-      SqrtPriceMath.getAmount1Delta(
-        sqrtRatioX96,
-        lowerSqrtRatioX96,
-        precision,
-        true
-      )
-    );
-    if (!zeroForOne) optimalRatio = optimalRatio.invert();
+      const precision = JSBI.BigInt('1' + '0'.repeat(18));
+      let currentPositionRation = new Fraction(
+        SqrtPriceMath.getAmount0Delta(
+          sqrtRatioX96,
+          upperSqrtRatioX96,
+          precision,
+          true
+        ),
+        SqrtPriceMath.getAmount1Delta(
+          sqrtRatioX96,
+          lowerSqrtRatioX96,
+          precision,
+          true
+        )
+      );
+
+      if (!zeroForOne) {
+        currentPositionRation = currentPositionRation.invert();
+      }
+
+      if (accumulator.equalTo(new Fraction(0, 0))) {
+        accumulator = currentPositionRation;
+      } else {
+        accumulator = accumulator.add(currentPositionRation);
+      }
+      return accumulator;
+    }, frac);
     return optimalRatio;
   }
 

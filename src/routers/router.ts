@@ -16,8 +16,8 @@ import {
 import { BigNumber } from 'ethers';
 import { CurrencyAmount } from '../util/amounts';
 import { RouteWithValidQuote } from './alpha-router';
-export class V3Route extends V3RouteRaw<Token, Token> {}
-export class V2Route extends V2RouteRaw<Token, Token> {}
+export class V3Route extends V3RouteRaw<Token, Token> { }
+export class V2Route extends V2RouteRaw<Token, Token> { }
 
 export type SwapRoute = {
   /**
@@ -107,13 +107,13 @@ export type SwapOptions = {
     s: string;
   } & (
     | {
-        amount: string;
-        deadline: string;
-      }
+      amount: string;
+      deadline: string;
+    }
     | {
-        nonce: string;
-        expiry: string;
-      }
+      nonce: string;
+      expiry: string;
+    }
   );
 };
 
@@ -175,7 +175,7 @@ export abstract class ISwapToRatio<RoutingConfig, SwapAndAddConfig> {
   abstract routeToRatio(
     token0Balance: CurrencyAmount,
     token1Balance: CurrencyAmount,
-    position: Position,
+    position: Array<Position>,
     swapAndAddConfig: SwapAndAddConfig,
     swapAndAddOptions?: SwapAndAddOptions,
     routingConfig?: RoutingConfig
