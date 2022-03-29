@@ -486,8 +486,8 @@ describe('alpha router', () => {
       ).toBeTruthy();
       expect(
         swap!.estimatedGasUsedUSD.currency.equals(USDC) ||
-        swap!.estimatedGasUsedUSD.currency.equals(USDT) ||
-        swap!.estimatedGasUsedUSD.currency.equals(DAI)
+          swap!.estimatedGasUsedUSD.currency.equals(USDT) ||
+          swap!.estimatedGasUsedUSD.currency.equals(DAI)
       ).toBeTruthy();
       expect(swap!.gasPriceWei.toString()).toEqual(
         mockGasPriceWeiBN.toString()
@@ -645,8 +645,8 @@ describe('alpha router', () => {
       ).toBeTruthy();
       expect(
         swap!.estimatedGasUsedUSD.currency.equals(USDC) ||
-        swap!.estimatedGasUsedUSD.currency.equals(USDT) ||
-        swap!.estimatedGasUsedUSD.currency.equals(DAI)
+          swap!.estimatedGasUsedUSD.currency.equals(USDT) ||
+          swap!.estimatedGasUsedUSD.currency.equals(DAI)
       ).toBeTruthy();
       expect(swap!.gasPriceWei.toString()).toEqual(
         mockGasPriceWeiBN.toString()
@@ -746,8 +746,8 @@ describe('alpha router', () => {
       ).toBeTruthy();
       expect(
         swap!.estimatedGasUsedUSD.currency.equals(USDC) ||
-        swap!.estimatedGasUsedUSD.currency.equals(USDT) ||
-        swap!.estimatedGasUsedUSD.currency.equals(DAI)
+          swap!.estimatedGasUsedUSD.currency.equals(USDT) ||
+          swap!.estimatedGasUsedUSD.currency.equals(DAI)
       ).toBeTruthy();
       expect(swap!.gasPriceWei.toString()).toEqual(
         mockGasPriceWeiBN.toString()
@@ -810,8 +810,8 @@ describe('alpha router', () => {
       ).toBeTruthy();
       expect(
         swap!.estimatedGasUsedUSD.currency.equals(USDC) ||
-        swap!.estimatedGasUsedUSD.currency.equals(USDT) ||
-        swap!.estimatedGasUsedUSD.currency.equals(DAI)
+          swap!.estimatedGasUsedUSD.currency.equals(USDT) ||
+          swap!.estimatedGasUsedUSD.currency.equals(DAI)
       ).toBeTruthy();
       expect(swap!.gasPriceWei.toString()).toEqual(
         mockGasPriceWeiBN.toString()
@@ -881,8 +881,8 @@ describe('alpha router', () => {
       ).toBeTruthy();
       expect(
         swap!.estimatedGasUsedUSD.currency.equals(USDC) ||
-        swap!.estimatedGasUsedUSD.currency.equals(USDT) ||
-        swap!.estimatedGasUsedUSD.currency.equals(DAI)
+          swap!.estimatedGasUsedUSD.currency.equals(USDT) ||
+          swap!.estimatedGasUsedUSD.currency.equals(DAI)
       ).toBeTruthy();
       expect(swap!.gasPriceWei.toString()).toEqual(
         mockGasPriceWeiBN.toString()
@@ -951,8 +951,8 @@ describe('alpha router', () => {
       ).toBeTruthy();
       expect(
         swap!.estimatedGasUsedUSD.currency.equals(USDC) ||
-        swap!.estimatedGasUsedUSD.currency.equals(USDT) ||
-        swap!.estimatedGasUsedUSD.currency.equals(DAI)
+          swap!.estimatedGasUsedUSD.currency.equals(USDT) ||
+          swap!.estimatedGasUsedUSD.currency.equals(DAI)
       ).toBeTruthy();
       expect(swap!.gasPriceWei.toString()).toEqual(
         mockGasPriceWeiBN.toString()
@@ -1091,8 +1091,8 @@ describe('alpha router', () => {
       ).toBeTruthy();
       expect(
         swap!.estimatedGasUsedUSD.currency.equals(USDC) ||
-        swap!.estimatedGasUsedUSD.currency.equals(USDT) ||
-        swap!.estimatedGasUsedUSD.currency.equals(DAI)
+          swap!.estimatedGasUsedUSD.currency.equals(USDT) ||
+          swap!.estimatedGasUsedUSD.currency.equals(DAI)
       ).toBeTruthy();
       expect(swap!.gasPriceWei.toString()).toEqual(
         mockGasPriceWeiBN.toString()
@@ -1166,8 +1166,8 @@ describe('alpha router', () => {
       ).toBeTruthy();
       expect(
         swap!.estimatedGasUsedUSD.currency.equals(USDC) ||
-        swap!.estimatedGasUsedUSD.currency.equals(USDT) ||
-        swap!.estimatedGasUsedUSD.currency.equals(DAI)
+          swap!.estimatedGasUsedUSD.currency.equals(USDT) ||
+          swap!.estimatedGasUsedUSD.currency.equals(DAI)
       ).toBeTruthy();
       expect(swap!.gasPriceWei.toString()).toEqual(
         mockGasPriceWeiBN.toString()
@@ -1224,8 +1224,8 @@ describe('alpha router', () => {
       ).toBeTruthy();
       expect(
         swap!.estimatedGasUsedUSD.currency.equals(USDC) ||
-        swap!.estimatedGasUsedUSD.currency.equals(USDT) ||
-        swap!.estimatedGasUsedUSD.currency.equals(DAI)
+          swap!.estimatedGasUsedUSD.currency.equals(USDT) ||
+          swap!.estimatedGasUsedUSD.currency.equals(DAI)
       ).toBeTruthy();
       expect(swap!.gasPriceWei.toString()).toEqual(
         mockGasPriceWeiBN.toString()
@@ -1290,8 +1290,8 @@ describe('alpha router', () => {
       ).toBeTruthy();
       expect(
         swap!.estimatedGasUsedUSD.currency.equals(USDC) ||
-        swap!.estimatedGasUsedUSD.currency.equals(USDT) ||
-        swap!.estimatedGasUsedUSD.currency.equals(DAI)
+          swap!.estimatedGasUsedUSD.currency.equals(USDT) ||
+          swap!.estimatedGasUsedUSD.currency.equals(DAI)
       ).toBeTruthy();
       expect(swap!.gasPriceWei.toString()).toEqual(
         mockGasPriceWeiBN.toString()
@@ -1355,8 +1355,8 @@ describe('alpha router', () => {
       ).toBeTruthy();
       expect(
         swap!.estimatedGasUsedUSD.currency.equals(USDC) ||
-        swap!.estimatedGasUsedUSD.currency.equals(USDT) ||
-        swap!.estimatedGasUsedUSD.currency.equals(DAI)
+          swap!.estimatedGasUsedUSD.currency.equals(USDT) ||
+          swap!.estimatedGasUsedUSD.currency.equals(DAI)
       ).toBeTruthy();
       expect(swap!.gasPriceWei.toString()).toEqual(
         mockGasPriceWeiBN.toString()
@@ -1888,7 +1888,9 @@ describe('alpha router', () => {
             inputBalanceSecond,
             outputBalanceSecond,
           ] = spy.secondCall.args;
-          expect(optimalRatioSecond.quotient).toEqual((new Fraction(0, 1)).quotient);
+          expect(optimalRatioSecond.quotient).toEqual(
+            new Fraction(0, 1).quotient
+          );
           // all other params remain the same
           expect(exchangeRateSecond.asFraction.toFixed(6)).toEqual(
             new Fraction(1, 1).toFixed(6)
@@ -2139,7 +2141,9 @@ describe('alpha router', () => {
               outputBalanceSecond,
             ] = spy.secondCall.args;
 
-            expect(optimalRatioSecond.quotient).toEqual((new Fraction(0, 1)).quotient);
+            expect(optimalRatioSecond.quotient).toEqual(
+              new Fraction(0, 1).quotient
+            );
             // all other params remain the same
             expect(exchangeRateSecond.asFraction.toFixed(6)).toEqual(
               new Fraction(1, 1).toFixed(6)

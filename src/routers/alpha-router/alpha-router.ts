@@ -309,8 +309,8 @@ export type AlphaRouterConfig = {
 
 export class AlphaRouter
   implements
-  IRouter<AlphaRouterConfig>,
-  ISwapToRatio<AlphaRouterConfig, SwapAndAddConfig>
+    IRouter<AlphaRouterConfig>,
+    ISwapToRatio<AlphaRouterConfig, SwapAndAddConfig>
 {
   protected chainId: ChainId;
   protected provider: providers.BaseProvider;
@@ -522,10 +522,10 @@ export class AlphaRouter
         chainId,
         this.provider instanceof providers.JsonRpcProvider
           ? new OnChainGasPriceProvider(
-            chainId,
-            new EIP1559GasPriceProvider(this.provider),
-            new LegacyGasPriceProvider(this.provider)
-          )
+              chainId,
+              new EIP1559GasPriceProvider(this.provider),
+              new LegacyGasPriceProvider(this.provider)
+            )
           : new ETHGasStationInfoProvider(ETH_GAS_STATION_API_URL),
         new NodeJSCache<GasPrice>(
           new NodeCache({ stdTTL: 15, useClones: false })
@@ -1016,7 +1016,8 @@ export class AlphaRouter
 
       if (token0Invalid || token1Invalid) {
         log.info(
-          `Dropping pool ${poolToString(pool)} because token is invalid. ${pool.token0.symbol
+          `Dropping pool ${poolToString(pool)} because token is invalid. ${
+            pool.token0.symbol
           }: ${token0Validation}, ${pool.token1.symbol}: ${token1Validation}`
         );
       }
@@ -1462,56 +1463,61 @@ export class AlphaRouter
     let runningTotals = new Array<JSBI>(2);
 
     //Get ratio of each position
-    let tokensNeeded = positions.reduce<Array<JSBI>>((accumulator, position) => {
-      const upperSqrtRatioX96 = TickMath.getSqrtRatioAtTick(position.tickUpper);
-      const lowerSqrtRatioX96 = TickMath.getSqrtRatioAtTick(position.tickLower);
+    let tokensNeeded = positions.reduce<Array<JSBI>>(
+      (accumulator, position) => {
+        const upperSqrtRatioX96 = TickMath.getSqrtRatioAtTick(
+          position.tickUpper
+        );
+        const lowerSqrtRatioX96 = TickMath.getSqrtRatioAtTick(
+          position.tickLower
+        );
 
-      let workingSqrtRatioX96 = sqrtRatioX96  //Represents current sqrt ratio x96, unless current liquidity position does not contain current tick, in which case it will
-      //represent either upper or lower bound depending on needs. Simplifies following math.
-      if (JSBI.greaterThan(sqrtRatioX96, upperSqrtRatioX96)) {
-        workingSqrtRatioX96 = upperSqrtRatioX96;
-      } else if (JSBI.lessThan(sqrtRatioX96, lowerSqrtRatioX96)
-      ) {
-        workingSqrtRatioX96 = lowerSqrtRatioX96;
-      }
+        let workingSqrtRatioX96 = sqrtRatioX96; //Represents current sqrt ratio x96, unless current liquidity position does not contain current tick, in which case it will
+        //represent either upper or lower bound depending on needs. Simplifies following math.
+        if (JSBI.greaterThan(sqrtRatioX96, upperSqrtRatioX96)) {
+          workingSqrtRatioX96 = upperSqrtRatioX96;
+        } else if (JSBI.lessThan(sqrtRatioX96, lowerSqrtRatioX96)) {
+          workingSqrtRatioX96 = lowerSqrtRatioX96;
+        }
 
-      const precision = JSBI.BigInt('1' + '0'.repeat(18));
+        const precision = JSBI.BigInt('1' + '0'.repeat(18));
 
-      let t0Needed = SqrtPriceMath.getAmount0Delta(
-        workingSqrtRatioX96,
-        upperSqrtRatioX96,
-        precision,
-        true
-      );
+        let t0Needed = SqrtPriceMath.getAmount0Delta(
+          workingSqrtRatioX96,
+          upperSqrtRatioX96,
+          precision,
+          true
+        );
 
-      let t1Needed =
-        SqrtPriceMath.getAmount1Delta(
+        let t1Needed = SqrtPriceMath.getAmount1Delta(
           workingSqrtRatioX96,
           lowerSqrtRatioX96,
           precision,
           true
         );
 
-      if (!zeroForOne) {
-        let temp = t0Needed;
-        t0Needed = t1Needed;
-        t1Needed = temp;
-      }
+        if (!zeroForOne) {
+          let temp = t0Needed;
+          t0Needed = t1Needed;
+          t1Needed = temp;
+        }
 
-      if (accumulator[0] == null) {
-        accumulator[0] = t0Needed;
-      } else {
-        accumulator[0] = JSBI.add(accumulator[0], t0Needed);
-      }
+        if (accumulator[0] == null) {
+          accumulator[0] = t0Needed;
+        } else {
+          accumulator[0] = JSBI.add(accumulator[0], t0Needed);
+        }
 
-      if (accumulator[1] == null) {
-        accumulator[1] = t1Needed;
-      } else {
-        accumulator[1] = JSBI.add(accumulator[1], t1Needed);
-      }
+        if (accumulator[1] == null) {
+          accumulator[1] = t1Needed;
+        } else {
+          accumulator[1] = JSBI.add(accumulator[1], t1Needed);
+        }
 
-      return accumulator;
-    }, runningTotals);
+        return accumulator;
+      },
+      runningTotals
+    );
 
     if (tokensNeeded[0] == null || tokensNeeded[1] == null) {
       return new Fraction(0, 0);
