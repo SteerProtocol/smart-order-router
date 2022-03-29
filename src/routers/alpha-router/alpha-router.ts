@@ -583,7 +583,7 @@ export class AlphaRouter
     }
 
     // Pull the first position provided,
-    // there should be atleast one position proided into this algorithm
+    // there should be at least one position provided into this algorithm
     const position = positions[0];
 
     // Every position has a pool, if there is no pool
@@ -593,7 +593,7 @@ export class AlphaRouter
     }
 
     // Pull the pool from the position
-    // All the pools should be the same for the entire positions array
+    // All the pools should be the same for the entire positions array, so we only need to pull the first position's pool.
     const pool = position!.pool;
 
     // Provide the positions as well as the current pool sqrtRatio,
@@ -606,17 +606,11 @@ export class AlphaRouter
 
     // set up parameters according to which token will be swapped
     let zeroForOne: boolean;
-    if (position.pool.tickCurrent > position.tickUpper) {
-      zeroForOne = true;
-    } else if (position.pool.tickCurrent < position.tickLower) {
-      zeroForOne = false;
-    } else {
-      zeroForOne = new Fraction(
-        token0Balance.quotient,
-        token1Balance.quotient
-      ).greaterThan(preSwapOptimalRatio);
-      if (!zeroForOne) preSwapOptimalRatio = preSwapOptimalRatio.invert();
-    }
+    zeroForOne = new Fraction(
+      token0Balance.quotient,
+      token1Balance.quotient
+    ).greaterThan(preSwapOptimalRatio);
+    if (!zeroForOne) preSwapOptimalRatio = preSwapOptimalRatio.invert();
 
     const [inputBalance, outputBalance] = zeroForOne
       ? [token0Balance, token1Balance]
@@ -1465,49 +1459,65 @@ export class AlphaRouter
     sqrtRatioX96: JSBI,
     zeroForOne: boolean
   ): Fraction {
-    let frac = new Fraction(0, 0);
-    let optimalRatio = positions.reduce<Fraction>((accumulator, position) => {
+    let runningTotals = new Array<JSBI>(2);
+
+    //Get ratio of each position
+    let tokensNeeded = positions.reduce<Array<JSBI>>((accumulator, position) => {
       const upperSqrtRatioX96 = TickMath.getSqrtRatioAtTick(position.tickUpper);
       const lowerSqrtRatioX96 = TickMath.getSqrtRatioAtTick(position.tickLower);
 
-      // returns Fraction(0, 1) for any out of range position regardless of zeroForOne. Implication: function
-      // cannot be used to determine the trading direction of out of range positions.
-      if (
-        JSBI.greaterThan(sqrtRatioX96, upperSqrtRatioX96) ||
-        JSBI.lessThan(sqrtRatioX96, lowerSqrtRatioX96)
+      let workingSqrtRatioX96 = sqrtRatioX96  //Represents current sqrt ratio x96, unless current liquidity position does not contain current tick, in which case it will
+      //represent either upper or lower bound depending on needs. Simplifies following math.
+      if (JSBI.greaterThan(sqrtRatioX96, upperSqrtRatioX96)) {
+        workingSqrtRatioX96 = upperSqrtRatioX96;
+      } else if (JSBI.lessThan(sqrtRatioX96, lowerSqrtRatioX96)
       ) {
-        accumulator = new Fraction(0, 1);
-        return accumulator;
+        workingSqrtRatioX96 = lowerSqrtRatioX96;
       }
 
       const precision = JSBI.BigInt('1' + '0'.repeat(18));
-      let currentPositionRation = new Fraction(
-        SqrtPriceMath.getAmount0Delta(
-          sqrtRatioX96,
-          upperSqrtRatioX96,
-          precision,
-          true
-        ),
+
+      let t0Needed = SqrtPriceMath.getAmount0Delta(
+        workingSqrtRatioX96,
+        upperSqrtRatioX96,
+        precision,
+        true
+      );
+
+      let t1Needed =
         SqrtPriceMath.getAmount1Delta(
-          sqrtRatioX96,
+          workingSqrtRatioX96,
           lowerSqrtRatioX96,
           precision,
           true
-        )
-      );
+        );
 
       if (!zeroForOne) {
-        currentPositionRation = currentPositionRation.invert();
+        let temp = t0Needed;
+        t0Needed = t1Needed;
+        t1Needed = temp;
       }
 
-      if (accumulator.equalTo(new Fraction(0, 0))) {
-        accumulator = currentPositionRation;
+      if (accumulator[0] == null) {
+        accumulator[0] = t0Needed;
       } else {
-        accumulator = accumulator.add(currentPositionRation);
+        accumulator[0] = JSBI.add(accumulator[0], t0Needed);
       }
+
+      if (accumulator[1] == null) {
+        accumulator[1] = t1Needed;
+      } else {
+        accumulator[1] = JSBI.add(accumulator[1], t1Needed);
+      }
+
       return accumulator;
-    }, frac);
-    return optimalRatio;
+    }, runningTotals);
+
+    if (tokensNeeded[0] == null || tokensNeeded[1] == null) {
+      return new Fraction(0, 0);
+    } else {
+      return new Fraction(tokensNeeded[0], tokensNeeded[1]);
+    }
   }
 
   private absoluteValue(fraction: Fraction): Fraction {

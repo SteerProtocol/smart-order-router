@@ -1888,7 +1888,7 @@ describe('alpha router', () => {
             inputBalanceSecond,
             outputBalanceSecond,
           ] = spy.secondCall.args;
-          expect(optimalRatioSecond).toEqual(new Fraction(0, 1));
+          expect(optimalRatioSecond.quotient).toEqual((new Fraction(0, 1)).quotient);
           // all other params remain the same
           expect(exchangeRateSecond.asFraction.toFixed(6)).toEqual(
             new Fraction(1, 1).toFixed(6)
@@ -2138,7 +2138,8 @@ describe('alpha router', () => {
               inputBalanceSecond,
               outputBalanceSecond,
             ] = spy.secondCall.args;
-            expect(optimalRatioSecond).toEqual(new Fraction(0, 1));
+
+            expect(optimalRatioSecond.quotient).toEqual((new Fraction(0, 1)).quotient);
             // all other params remain the same
             expect(exchangeRateSecond.asFraction.toFixed(6)).toEqual(
               new Fraction(1, 1).toFixed(6)
