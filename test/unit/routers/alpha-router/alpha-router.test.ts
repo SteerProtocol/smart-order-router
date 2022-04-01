@@ -1387,7 +1387,7 @@ describe('alpha router', () => {
           const route = await alphaRouter.routeToRatio(
             token0Balance,
             token1Balance,
-            position,
+            [position],
             SWAP_AND_ADD_CONFIG,
             undefined,
             ROUTING_CONFIG
@@ -1423,7 +1423,7 @@ describe('alpha router', () => {
           await alphaRouter.routeToRatio(
             token0Balance,
             token1Balance,
-            position,
+            [position],
             SWAP_AND_ADD_CONFIG,
             undefined,
             ROUTING_CONFIG
@@ -1454,7 +1454,7 @@ describe('alpha router', () => {
           await alphaRouter.routeToRatio(
             token0Balance,
             token1Balance,
-            position,
+            [position],
             SWAP_AND_ADD_CONFIG,
             undefined,
             ROUTING_CONFIG
@@ -1483,7 +1483,7 @@ describe('alpha router', () => {
           await alphaRouter.routeToRatio(
             token0Balance,
             token1Balance,
-            position,
+            [position],
             SWAP_AND_ADD_CONFIG,
             undefined,
             ROUTING_CONFIG
@@ -1514,7 +1514,7 @@ describe('alpha router', () => {
           await alphaRouter.routeToRatio(
             token0Balance,
             token1Balance,
-            position,
+            [position],
             SWAP_AND_ADD_CONFIG,
             undefined,
             ROUTING_CONFIG
@@ -1545,7 +1545,7 @@ describe('alpha router', () => {
           await alphaRouter.routeToRatio(
             token0Balance,
             token1Balance,
-            position,
+            [position],
             SWAP_AND_ADD_CONFIG,
             undefined,
             ROUTING_CONFIG
@@ -1578,7 +1578,7 @@ describe('alpha router', () => {
         const result = await alphaRouter.routeToRatio(
           token0Balance,
           token1Balance,
-          position,
+          [position],
           SWAP_AND_ADD_CONFIG,
           undefined,
           ROUTING_CONFIG
@@ -1604,7 +1604,7 @@ describe('alpha router', () => {
         const result = await alphaRouter.routeToRatio(
           token0Balance,
           token1Balance,
-          position,
+          [position],
           SWAP_AND_ADD_CONFIG,
           undefined,
           ROUTING_CONFIG
@@ -1676,7 +1676,7 @@ describe('alpha router', () => {
         const swap = await alphaRouter.routeToRatio(
           token0Balance,
           token1Balance,
-          position,
+          [position],
           SWAP_AND_ADD_CONFIG,
           undefined,
           ROUTING_CONFIG
@@ -1729,7 +1729,7 @@ describe('alpha router', () => {
           await alphaRouter.routeToRatio(
             token0Balance,
             token1Balance,
-            position,
+            [position],
             SWAP_AND_ADD_CONFIG,
             undefined,
             ROUTING_CONFIG
@@ -1792,7 +1792,7 @@ describe('alpha router', () => {
           await alphaRouter.routeToRatio(
             token0Balance,
             token1Balance,
-            position,
+            [position],
             SWAP_AND_ADD_CONFIG,
             undefined,
             ROUTING_CONFIG
@@ -1859,7 +1859,7 @@ describe('alpha router', () => {
           await alphaRouter.routeToRatio(
             token0Balance,
             token1Balance,
-            position,
+            [position],
             SWAP_AND_ADD_CONFIG,
             undefined,
             ROUTING_CONFIG
@@ -1888,7 +1888,9 @@ describe('alpha router', () => {
             inputBalanceSecond,
             outputBalanceSecond,
           ] = spy.secondCall.args;
-          expect(optimalRatioSecond).toEqual(new Fraction(0, 1));
+          expect(optimalRatioSecond.quotient).toEqual(
+            new Fraction(0, 1).quotient
+          );
           // all other params remain the same
           expect(exchangeRateSecond.asFraction.toFixed(6)).toEqual(
             new Fraction(1, 1).toFixed(6)
@@ -1937,7 +1939,7 @@ describe('alpha router', () => {
           await alphaRouter.routeToRatio(
             token0Balance,
             token1Balance,
-            position,
+            [position],
             SWAP_AND_ADD_CONFIG,
             undefined,
             ROUTING_CONFIG
@@ -2001,7 +2003,7 @@ describe('alpha router', () => {
             await alphaRouter.routeToRatio(
               token0Balance,
               token1Balance,
-              position,
+              [position],
               SWAP_AND_ADD_CONFIG,
               undefined,
               ROUTING_CONFIG
@@ -2064,7 +2066,7 @@ describe('alpha router', () => {
             const swap = await alphaRouter.routeToRatio(
               token0Balance,
               token1Balance,
-              position,
+              [position],
               SWAP_AND_ADD_CONFIG,
               undefined,
               ROUTING_CONFIG
@@ -2109,7 +2111,7 @@ describe('alpha router', () => {
             await alphaRouter.routeToRatio(
               token0Balance,
               token1Balance,
-              position,
+              [position],
               SWAP_AND_ADD_CONFIG,
               undefined,
               ROUTING_CONFIG
@@ -2138,7 +2140,10 @@ describe('alpha router', () => {
               inputBalanceSecond,
               outputBalanceSecond,
             ] = spy.secondCall.args;
-            expect(optimalRatioSecond).toEqual(new Fraction(0, 1));
+
+            expect(optimalRatioSecond.quotient).toEqual(
+              new Fraction(0, 1).quotient
+            );
             // all other params remain the same
             expect(exchangeRateSecond.asFraction.toFixed(6)).toEqual(
               new Fraction(1, 1).toFixed(6)
@@ -2184,7 +2189,7 @@ describe('alpha router', () => {
         const swap = await alphaRouter.routeToRatio(
           token0Balance,
           token1Balance,
-          positionPreLiquidity,
+          [positionPreLiquidity],
           SWAP_AND_ADD_CONFIG,
           SWAP_AND_ADD_OPTIONS,
           ROUTING_CONFIG
@@ -2229,7 +2234,7 @@ describe('alpha router', () => {
         const swap = await alphaRouter.routeToRatio(
           token0Balance,
           token1Balance,
-          positionPreLiquidity,
+          [positionPreLiquidity],
           SWAP_AND_ADD_CONFIG,
           undefined,
           ROUTING_CONFIG

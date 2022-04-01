@@ -108,7 +108,7 @@ export class QuoteToRatio extends BaseCommand {
     swapRoutes = await router.routeToRatio(
       token0Balance,
       token1Balance,
-      position,
+      [position],
       {
         ratioErrorTolerance: new Fraction(1, 100),
         maxIterations: 6,

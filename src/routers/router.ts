@@ -175,7 +175,7 @@ export abstract class ISwapToRatio<RoutingConfig, SwapAndAddConfig> {
   abstract routeToRatio(
     token0Balance: CurrencyAmount,
     token1Balance: CurrencyAmount,
-    position: Position,
+    position: Array<Position>,
     swapAndAddConfig: SwapAndAddConfig,
     swapAndAddOptions?: SwapAndAddOptions,
     routingConfig?: RoutingConfig
