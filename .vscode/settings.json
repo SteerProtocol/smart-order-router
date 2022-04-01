@@ -2,8 +2,6 @@
   "editor.formatOnSave": true,
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
-  "cSpell.words": [
-    "JSBI"
-  ],
+  "cSpell.words": ["JSBI"],
   "jest.jestCommandLine": "yarn test"
 }
