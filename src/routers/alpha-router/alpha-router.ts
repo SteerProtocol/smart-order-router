@@ -1480,7 +1480,7 @@ export class AlphaRouter
       let t0Needed = SqrtPriceMath.getAmount0Delta(
         workingSqrtRatioX96,
         upperSqrtRatioX96,
-        precision,
+        JSBI.multiply(precision, position.liquidity),
         true
       );
 
@@ -1488,7 +1488,7 @@ export class AlphaRouter
         SqrtPriceMath.getAmount1Delta(
           workingSqrtRatioX96,
           lowerSqrtRatioX96,
-          precision,
+          JSBI.multiply(precision, position.liquidity),
           true
         );
 
